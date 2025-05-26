@@ -1,5 +1,103 @@
 ﻿using System;
 
+public class Dipendente
+{
+    private string nome;
+    private int eta;
+
+    public string Nome
+    {
+        get { return nome; }
+        set { nome = value; }
+    }
+
+    public int Eta
+    {
+        get { return eta; }
+        set
+        {
+            if (value >= 18)
+                eta = value;
+        }
+    }
+
+    public virtual string EseguiCompito()
+    {
+        return "Compito Generico del dipendente";
+    }
+
+}
+
+public class Autista : Dipendente
+{
+    public Autista(string nome, int eta, string patente)
+    {
+        Nome = nome;
+        Eta = eta;
+        Patente = patente;
+    }
+
+    public string Patente { get; set; }
+
+    public override string EseguiCompito()
+    {
+        return $"Guida il veicolo con patente {Patente}";
+    }
+}
+
+public class Meccanico : Dipendente
+{
+    public Meccanico(string nome, int eta, string specializzazione)
+    {
+        Nome = nome;
+        Eta = eta;
+        Specializzazione = specializzazione;
+    }
+
+    public string Specializzazione { get; set; }
+
+    public override string EseguiCompito()
+    {
+        return $"Ripara mezzi specializzati in {Specializzazione}";
+    }
+}
+
+public class OperatoreCentrale : Dipendente
+{
+    private string turno;
+
+    public OperatoreCentrale(string nome, int eta, string turno)
+    {
+        Nome = nome;
+        Eta = eta;
+        Turno = turno;
+    }
+
+    public string Turno
+    {
+        get
+        {
+            return turno;
+        }
+        set
+        {
+            if (value.ToLower() == "giorno" || value.ToLower() == "notte")
+            {
+                turno = value;
+            }
+            else
+            {
+                Console.WriteLine("Turno non valido. Inserire solo 'giorno' o 'notte'.");
+            }
+        }
+    }
+
+    public override string EseguiCompito()
+    {
+        return $"Gestisce le comunicazioni in turno {Turno}";
+    }
+}
+
 public class Program
 {
     public static void Main(string[] args)
@@ -92,7 +190,7 @@ public class Program
     {
         foreach (Dipendente dip in dipendenti)
         {
-            Console.WriteLine($"Nome: {dip.Nome}, Turno: {dip.Turno}, Tipo: {dip.GetType().Name}");
+            Console.WriteLine($"Nome: {dip.Nome}, Eta: {dip.Eta}, Tipo: {dip.GetType().Name}");
         }
     }
 
