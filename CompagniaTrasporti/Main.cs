@@ -95,4 +95,12 @@ public class Program
             Console.WriteLine($"Nome: {dip.Nome}, Turno: {dip.Turno}, Tipo: {dip.GetType().Name}");
         }
     }
+
+    private static void Compito(List<Dipendente> dipendenti)
+    {
+        foreach (Dipendente dip in dipendenti)
+        {
+            Console.WriteLine(dip.EseguiCompito());
+        }
+    }
 }
